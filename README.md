@@ -51,6 +51,14 @@ Run the hello-world CLI from the repository root:
 .venv/bin/python -m inventory_feed_tool
 ```
 
+Run the desktop app shell:
+
+```bash
+.venv/bin/inventory-feed-tool-gui
+```
+
+On Linux, this requires the system Tkinter package. On Ubuntu-based systems that is usually `python3-tk`. Windows Python distributions typically include Tkinter.
+
 Run tests:
 
 ```bash
@@ -59,4 +67,20 @@ Run tests:
 
 ## Packaging Direction
 
-The application will be designed so the ETL core, CLI, and eventual desktop UI can be packaged into a Windows executable. The current skeleton intentionally uses only the Python standard library at runtime.
+The application is designed so the ETL core, CLI, and desktop UI can share the same conversion services.
+
+The first packaging target is a PyInstaller one-folder Windows build. From Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+.\scripts\build_windows.ps1 -Clean
+```
+
+The expected build output is:
+
+```text
+dist/InventoryFeedTool/InventoryFeedTool.exe
+```
+
+GitHub Actions also includes a manual `Windows Package` workflow that uploads the packaged app as an artifact.

@@ -4,6 +4,8 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Added initial Tkinter desktop app shell.
+- Added Windows PyInstaller packaging script and workflow.
 - Added project-level agent guidance.
 - Added initial project skeleton.
 - Added feature documentation structure.

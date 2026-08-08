@@ -14,8 +14,14 @@ authors = [
 ]
 dependencies = []
 
+[project.optional-dependencies]
+packaging = [
+  "pyinstaller>=6.0"
+]
+
 [project.scripts]
 inventory-feed-tool = "inventory_feed_tool.cli:main"
+inventory-feed-tool-gui = "inventory_feed_tool.gui_app:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

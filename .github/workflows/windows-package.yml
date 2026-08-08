@@ -1,0 +1,31 @@
+name: Windows Package
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  package:
+    name: Build Windows executable
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build executable
+        shell: pwsh
+        run: ./scripts/build_windows.ps1 -Clean
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: InventoryFeedTool-windows
+          path: dist/InventoryFeedTool
