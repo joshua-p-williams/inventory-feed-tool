@@ -12,6 +12,9 @@ htmlcov/
 venv/
 env/
 
+.agents/
+.codex/
+
 build/
 dist/
 *.egg-info/
