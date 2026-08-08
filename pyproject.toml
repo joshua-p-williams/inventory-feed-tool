@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "inventory-feed-tool"
+version = "0.1.0"
+description = "Local ETL utility for converting distributor inventory feeds into website-ready product import files."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Joshua Williams" }
+]
+dependencies = []
+
+[project.scripts]
+inventory-feed-tool = "inventory_feed_tool.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
