@@ -21,6 +21,7 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - `CanonicalProduct` for one sellable product grouped from one or more distributor offers.
 - Configurable MAP-aware pricing helpers.
 - Reusable parsing helpers for money, booleans, optional text, and availability tokens.
+- Local SQLite storage for settings, export runs, external product mappings, source offer snapshots, and source-selection overrides.
 
 ## Project Structure
 

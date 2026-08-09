@@ -1,0 +1,21 @@
+# Tasks
+
+- [x] Define local SQLite storage scope.
+- [x] Decide database path strategy.
+- [x] Decide schema versioning strategy.
+- [x] Draft storage schema.
+- [x] Decide configuration serialization strategy.
+- [x] Confirm no credentials or raw feed files should be stored.
+- [x] Review feature docs.
+- [x] Implement `storage.py`.
+- [x] Implement app-data database path discovery.
+- [x] Implement schema initialization.
+- [x] Implement run configuration serialization.
+- [x] Implement settings operations.
+- [x] Implement export run operations.
+- [x] Implement external product mapping operations.
+- [x] Implement source offer snapshot operations.
+- [x] Implement source override operations.
+- [x] Add unit tests.
+- [x] Update README and changelog.
+- [x] Verify locally.
