@@ -73,7 +73,7 @@ class AvailabilityPolicy:
     include_zero_quantity: bool = False
     include_allocated: bool = False
     include_unknown_quantity: bool = False
-    approximate_quantity_floor: int = 99
+    approximate_quantity_floor: int = 0
     allow_backorder: bool = False
 
     def __post_init__(self) -> None:
@@ -277,4 +277,3 @@ def fallback_canonical_sku(distributor: str, source_sku: str) -> str:
     if not distributor_code or not source_code:
         raise ValueError("distributor and source_sku are required")
     return f"{distributor_code}-{source_code}"
-

@@ -11,6 +11,7 @@ Proposed module layout:
 ```text
 src/inventory_feed_tool/
   models.py
+  parsing.py
   pricing.py
   validation.py
 ```
@@ -111,7 +112,7 @@ Initial defaults:
 - `include_zero_quantity`: `false`
 - `include_allocated`: `false`
 - `include_unknown_quantity`: `false`
-- `approximate_quantity_floor`: `99`
+- `approximate_quantity_floor`: `0`
 - `allow_backorder`: `false`
 
 ### `SourceSelectionPolicy`
@@ -302,7 +303,8 @@ Default behavior under the initial `AvailabilityPolicy`:
 
 - Exact positive quantities are `available` and exportable by default.
 - Exact zero quantities are `out_of_stock` and not exportable by default.
-- `99+` is `available`, uses `99` as the conservative quantity, and carries an approximate-quantity warning.
+- `99+` is `available`, uses `99` as the conservative lower-bound quantity, and carries an approximate-quantity warning.
+- Other `X+` quantities should use `X` as the conservative lower-bound quantity unless `approximate_quantity_floor` is explicitly configured higher.
 - Allocated values such as Lipseys `ALLOCATED` or Davidsons `A*` are `allocated`, use quantity `0` for default export decisions, and are not exportable unless `include_allocated` is enabled or a manual override exists.
 - Unknown/call-for-availability values are `unknown`, use quantity `0`, and are not exportable unless `include_unknown_quantity` is enabled or a manual override exists.
 

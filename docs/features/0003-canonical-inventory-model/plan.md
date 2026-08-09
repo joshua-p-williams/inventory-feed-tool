@@ -56,7 +56,7 @@ No open review points remain for this feature.
 - Lipseys image URLs can be built from `IMAGENAME` with `https://www.lipseyscloud.com/images/{IMAGENAME}?height=320&width=480&scale=canvas`.
 - Current Davidsons sample feeds have no image fields; leave Davidsons image URLs blank unless a future source provides image data.
 - Allocated inventory is not exportable by default. This includes Lipseys `ALLOCATED` offers and Davidsons `A` / `A*` quantity tokens.
-- `99+` inventory is exportable by default as an approximate available quantity of `99`, with a warning.
+- `99+` inventory is exportable by default as an approximate available quantity of `99`, with a warning. Other `X+` values use `X` as the lower bound unless explicitly configured otherwise.
 - GoDaddy supports inventory and backorder controls, but the MVP should not export allocated/unknown inventory as inquiry-only products because no safe CSV-supported "call for details" state has been confirmed.
 - FFL/SOT/NFA flags should be exported as description notes initially, not excluded by default.
 - Preserve categories/families in the middle model, but do not make GoDaddy storefront category assignment part of the first import.

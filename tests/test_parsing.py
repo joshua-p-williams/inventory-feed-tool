@@ -43,6 +43,20 @@ class ParsingTests(unittest.TestCase):
         self.assertEqual(availability.raw_quantity, "99+")
         self.assertTrue(availability.is_exportable_by_default)
 
+    def test_parse_approximate_quantity_uses_numeric_lower_bound_by_default(self) -> None:
+        availability = parse_availability("5+")
+
+        self.assertEqual(availability.quantity, 5)
+        self.assertTrue(availability.is_exportable_by_default)
+
+    def test_parse_approximate_quantity_can_apply_configured_floor(self) -> None:
+        availability = parse_availability(
+            "5+",
+            policy=AvailabilityPolicy(approximate_quantity_floor=10),
+        )
+
+        self.assertEqual(availability.quantity, 10)
+
     def test_parse_unknown_quantity_can_be_enabled_by_policy(self) -> None:
         availability = parse_availability(
             "Call",
@@ -55,4 +69,3 @@ class ParsingTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

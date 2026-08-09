@@ -32,6 +32,7 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(configuration.pricing.map_mode, MapMode.RESPECT)
         self.assertFalse(configuration.availability.include_allocated)
         self.assertFalse(configuration.availability.include_unknown_quantity)
+        self.assertEqual(configuration.availability.approximate_quantity_floor, 0)
         self.assertFalse(configuration.availability.allow_backorder)
         self.assertTrue(configuration.images.include_image_urls)
 
@@ -103,4 +104,3 @@ class ModelTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
