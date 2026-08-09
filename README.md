@@ -12,6 +12,16 @@ The first export target is the GoDaddy product import CSV format. The first supp
 - Keep source adapters isolated so new distributors can be added without rewriting the ETL engine.
 - Produce validation messages so bad source rows do not crash the whole conversion.
 
+## Current Foundation
+
+The ETL core currently includes the shared model pieces that feed adapters and exporters will use:
+
+- `RunConfiguration` and policy objects for pricing, availability, source selection, image handling, compliance behavior, and export mode.
+- `SourceOffer` for one distributor's listing of a product.
+- `CanonicalProduct` for one sellable product grouped from one or more distributor offers.
+- Configurable MAP-aware pricing helpers.
+- Reusable parsing helpers for money, booleans, optional text, and availability tokens.
+
 ## Project Structure
 
 ```text

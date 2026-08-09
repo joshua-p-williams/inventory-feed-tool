@@ -33,5 +33,5 @@ The repository should keep normal tests separate from packaging. Packaging can r
 ## Open Questions
 
 - Should release builds be one-folder zips or one-file executables?
-- Will Jeremiah prefer a portable zip or a Windows installer?
+- Will the operator prefer a portable zip or a Windows installer?
 - Should code signing be added later to reduce antivirus warnings?

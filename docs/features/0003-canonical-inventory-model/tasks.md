@@ -1,0 +1,32 @@
+# Tasks
+
+- [x] Analyze GoDaddy template columns.
+- [x] Analyze Lipseys sample fields and data quality.
+- [x] Analyze Davidsons sample fields and data quality.
+- [x] Research official GoDaddy import documentation.
+- [x] Research public Lipseys feed, catalog, image, and availability behavior.
+- [x] Research public Davidsons inventory, MAP, backorder, and availability behavior.
+- [x] Decide GoDaddy `PRODUCT ID` ownership and update-mode direction.
+- [x] Decide dropshipping is out of scope for the MVP.
+- [x] Decide Lipseys image URL construction from `IMAGENAME`.
+- [x] Decide allocated/unknown inventory is not exportable by default.
+- [x] Capture SQLite mapping/history as a future feature.
+- [x] Decide product-vs-source-offer modeling direction.
+- [x] Capture conflict/source-selection requirements.
+- [x] Decide configuration is a first-class pipeline input.
+- [x] Confirm extra source attributes can be preserved as key/value metadata.
+- [x] Confirm configurable pricing behavior and MAP fallback.
+- [x] Confirm allocated/unknown inventory is preserved internally but not exported by default.
+- [x] Confirm categories are preserved in the model but secondary for GoDaddy export.
+- [x] Confirm missing/broken image URLs warn only.
+- [x] Confirm UPC-based canonical SKU strategy.
+- [x] Confirm FFL/SOT/NFA flags become description notes initially.
+- [x] Draft model architecture.
+- [x] Review model with project owner.
+- [x] Implement source-offer and canonical-product dataclasses.
+- [x] Implement run configuration and policy dataclasses.
+- [x] Implement configurable MAP-aware pricing helper.
+- [x] Implement validation message types.
+- [x] Add unit tests.
+- [x] Update README and changelog.
+- [x] Verify locally.
