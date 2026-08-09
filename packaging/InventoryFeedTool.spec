@@ -1,13 +1,17 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+from pathlib import Path
+
 from PyInstaller.utils.hooks import collect_submodules
 
 
+project_root = Path(SPECPATH).parent
+entry_point = project_root / "src" / "inventory_feed_tool" / "gui_app.py"
 hiddenimports = collect_submodules("tkinter")
 
 a = Analysis(
-    ["src/inventory_feed_tool/gui_app.py"],
-    pathex=[],
+    [str(entry_point)],
+    pathex=[str(project_root / "src")],
     binaries=[],
     datas=[],
     hiddenimports=hiddenimports,
