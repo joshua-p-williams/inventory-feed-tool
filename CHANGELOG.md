@@ -4,6 +4,7 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Added source aggregation and source-selection helpers for canonical products.
 - Added file-based Lipseys and Davidsons CSV feed adapters with sanitized fixture tests.
 - Added local SQLite storage for run settings, export runs, external product mappings, source offer snapshots, and source-selection overrides.
 - Added canonical inventory model, run configuration policies, pricing helpers, and parsing helpers.

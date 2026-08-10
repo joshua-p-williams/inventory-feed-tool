@@ -1,0 +1,29 @@
+# Tasks
+
+- [x] Refresh prior canonical model decisions.
+- [x] Refresh storage override decisions.
+- [x] Refresh feed-adapter boundaries.
+- [x] Define feature scope.
+- [x] Define aggregation API shape.
+- [x] Define grouping behavior.
+- [x] Define exportable candidate filtering.
+- [x] Decide all-non-exportable groups are dropped with aggregation warnings.
+- [x] Define source override behavior.
+- [x] Decide aggregation overrides stay target-neutral.
+- [x] Define selection strategies.
+- [x] Define tie-breakers.
+- [x] Define conflict detection behavior.
+- [x] Decide MAP conflicts warn only when two or more nonblank MAP values differ.
+- [x] Define storage boundary.
+- [x] Define test coverage.
+- [x] Review feature docs.
+- [x] Implement aggregation module.
+- [x] Add source selection override type.
+- [x] Add grouping logic.
+- [x] Add candidate filtering.
+- [x] Add strategy scoring.
+- [x] Add override handling.
+- [x] Add conflict detection.
+- [x] Add unit tests.
+- [x] Update README and changelog.
+- [x] Verify locally.
