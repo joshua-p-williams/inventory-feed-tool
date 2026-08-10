@@ -43,7 +43,8 @@
 
 This feature supports:
 
-- `0005-source-aggregation-and-selection`
-- `0006-godaddy-csv-exporter`
-- `0007-godaddy-export-sync`
-- `0008-update-mode-export`
+- `0005-distributor-feed-adapters`
+- `0006-source-aggregation-and-selection`
+- `0007-godaddy-csv-exporter`
+- `0008-godaddy-export-sync`
+- `0009-update-mode-export`

@@ -22,6 +22,7 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - Configurable MAP-aware pricing helpers.
 - Reusable parsing helpers for money, booleans, optional text, and availability tokens.
 - Local SQLite storage for settings, export runs, external product mappings, source offer snapshots, and source-selection overrides.
+- File-based Lipseys and Davidsons CSV adapters that produce normalized `SourceOffer` records and validation messages.
 
 ## Project Structure
 

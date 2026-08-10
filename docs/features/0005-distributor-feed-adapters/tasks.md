@@ -1,0 +1,25 @@
+# Tasks
+
+- [x] Refresh previous feature decisions.
+- [x] Refresh local sample file shapes.
+- [x] Refresh saved Lipseys research.
+- [x] Refresh saved Davidsons research.
+- [x] Define feed adapter scope.
+- [x] Define Lipseys column mapping.
+- [x] Define Davidsons column mapping.
+- [x] Decide file-based parsing only for this feature.
+- [x] Decide adapters produce `SourceOffer` objects only.
+- [x] Decide adapters do not aggregate, select, export, or sync.
+- [x] Decide distributors can be parsed independently.
+- [x] Decide Davidsons quantity file is optional but preferred.
+- [x] Decide Davidsons quantity file cannot be used without Davidsons inventory.
+- [x] Decide Davidsons `MSP` maps to MAP for initial parsing.
+- [x] Review feature docs.
+- [x] Implement feed package structure.
+- [x] Implement shared feed parse result.
+- [x] Implement Lipseys adapter.
+- [x] Implement Davidsons adapter.
+- [x] Implement Davidsons quantity-file merge.
+- [x] Add unit tests with sanitized fixtures.
+- [x] Update README and changelog.
+- [x] Verify locally.

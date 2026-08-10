@@ -2,6 +2,11 @@
 
 ## Inputs From Previous Feature
 
+Repo-safe reference summaries:
+
+- [GoDaddy product import reference](../../references/godaddy.md)
+- [Local sample feed shapes](../../references/sample-feed-shapes.md)
+
 Feature `0003-canonical-inventory-model` established the model and future storage needs:
 
 - `RunConfiguration` controls export mode, pricing, availability, source selection, image handling, and compliance behavior.

@@ -546,9 +546,9 @@ The model should support these later UI/export guardrails:
 Recommended next features after this model is implemented:
 
 - `0004-local-project-storage`: add SQLite storage for settings, export runs, and product mappings.
-- `0005-source-aggregation-and-selection`: group source offers into canonical products and choose selected offers.
-- `0006-godaddy-csv-exporter`: export GoDaddy CSV batches for new-import mode and define update-mode hooks.
-- `0007-godaddy-export-sync`: import GoDaddy product exports and sync GoDaddy `PRODUCT ID` mappings into SQLite.
-- `0008-update-mode-export`: enable update exports once mapping coverage and failure behavior are in place.
-- `0009-distributor-feed-adapters`: implement dealer-downloaded Lipseys and Davidsons CSV adapters, including Lipseys image URL construction and conservative availability parsing.
+- `0005-distributor-feed-adapters`: implement dealer-downloaded Lipseys and Davidsons CSV adapters, including Lipseys image URL construction and conservative availability parsing.
+- `0006-source-aggregation-and-selection`: group source offers into canonical products and choose selected offers.
+- `0007-godaddy-csv-exporter`: export GoDaddy CSV batches for new-import mode and define update-mode hooks.
+- `0008-godaddy-export-sync`: import GoDaddy product exports and sync GoDaddy `PRODUCT ID` mappings into SQLite.
+- `0009-update-mode-export`: enable update exports once mapping coverage and failure behavior are in place.
 - `0010-authenticated-feed-sources`: evaluate dealer-authorized API/FTP feed retrieval after the file-based workflow is working.

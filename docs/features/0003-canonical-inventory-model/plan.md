@@ -65,9 +65,9 @@ No open review points remain for this feature.
 ## Future Feature Queue
 
 1. `0004-local-project-storage`
-2. `0005-source-aggregation-and-selection`
-3. `0006-godaddy-csv-exporter`
-4. `0007-godaddy-export-sync`
-5. `0008-update-mode-export`
-6. `0009-distributor-feed-adapters`
+2. `0005-distributor-feed-adapters`
+3. `0006-source-aggregation-and-selection`
+4. `0007-godaddy-csv-exporter`
+5. `0008-godaddy-export-sync`
+6. `0009-update-mode-export`
 7. `0010-authenticated-feed-sources`

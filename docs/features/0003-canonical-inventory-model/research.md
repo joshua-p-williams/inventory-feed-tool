@@ -2,6 +2,10 @@
 
 ## Source Files Reviewed
 
+Repo-safe reference summary:
+
+- [Local sample feed shapes](../../references/sample-feed-shapes.md)
+
 Local sample files reviewed from the parent project folder:
 
 - `../godaddy_product_import_template.csv`
@@ -15,7 +19,12 @@ These files should not be copied into the repository unless sanitized and approv
 
 ## Distributor References
 
-Public distributor pages were downloaded to the parent project folder:
+Repo-safe reference summaries:
+
+- [Lipseys distributor feed reference](../../references/lipseys.md)
+- [Davidsons distributor feed reference](../../references/davidsons.md)
+
+Public distributor pages were downloaded to the parent project folder, outside this repository:
 
 - `../references/lipseys/`
 - `../references/davidsons/`
@@ -48,7 +57,11 @@ Minimum canonical support must cover these columns directly or intentionally lea
 
 ## Official GoDaddy References
 
-Official GoDaddy pages were downloaded to the parent project folder:
+Repo-safe reference summary:
+
+- [GoDaddy product import reference](../../references/godaddy.md)
+
+Official GoDaddy pages were downloaded to the parent project folder, outside this repository:
 
 - `../references/godaddy/catalog-import-starter-template-42984.html`
 - `../references/godaddy/import-products-from-a-csv-file-16581.html`
