@@ -24,6 +24,7 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - Local SQLite storage for settings, export runs, external product mappings, source offer snapshots, and source-selection overrides.
 - File-based Lipseys and Davidsons CSV adapters that produce normalized `SourceOffer` records and validation messages.
 - Source aggregation and selection helpers that group offers into exportable `CanonicalProduct` records.
+- GoDaddy CSV export helpers for new-product import batches.
 
 ## Project Structure
 

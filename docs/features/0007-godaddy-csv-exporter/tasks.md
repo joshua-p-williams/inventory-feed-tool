@@ -1,0 +1,32 @@
+# Tasks
+
+- [x] Refresh GoDaddy research.
+- [x] Refresh canonical model export mapping.
+- [x] Refresh aggregation/export boundary.
+- [x] Define feature scope.
+- [x] Define exporter API shape.
+- [x] Define GoDaddy column order.
+- [x] Define field mapping.
+- [x] Define batching behavior.
+- [x] Define new-import behavior.
+- [x] Decide new-import rows export stable canonical SKU.
+- [x] Define update-mode hook behavior.
+- [x] Define required field validation.
+- [x] Define unsupported field value validation.
+- [x] Define formatting behavior.
+- [x] Decide lowercase boolean formatting.
+- [x] Decide money formatting strips unnecessary trailing zeros.
+- [x] Decide update mode is rejected until mapping coverage exists.
+- [x] Define compliance description behavior.
+- [x] Define test coverage.
+- [x] Review feature docs.
+- [x] Implement exporter package structure.
+- [x] Implement GoDaddy column constants.
+- [x] Implement result dataclasses.
+- [x] Implement formatting helpers.
+- [x] Implement product row mapping.
+- [x] Implement CSV batching/writing.
+- [x] Implement update-mode safe failure.
+- [x] Add unit tests.
+- [x] Update README and changelog.
+- [x] Verify locally.
