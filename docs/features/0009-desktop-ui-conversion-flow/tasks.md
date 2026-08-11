@@ -1,0 +1,30 @@
+# Tasks
+
+- [x] Define feature scope.
+- [x] Review current desktop shell.
+- [x] Review `0008` workflow API.
+- [x] Define updated desktop state shape.
+- [x] Define validation behavior.
+- [x] Define initial UI options.
+- [x] Define result display behavior.
+- [x] Define storage boundary.
+- [x] Define test coverage.
+- [x] Review feature docs.
+- [x] Resolve review points.
+- [x] Update `DesktopAppState`.
+- [x] Add `NewImportInput` builder.
+- [x] Add `RunConfiguration` builder.
+- [x] Add result formatting helper.
+- [x] Update app state tests.
+- [x] Update Tkinter input rows.
+- [x] Add Davidsons quantity file picker.
+- [x] Change output picker to folder selection.
+- [x] Add markup percent control.
+- [x] Add include image URLs checkbox.
+- [x] Wire Convert to `run_new_import_workflow`.
+- [x] Disable Convert while running.
+- [x] Force UI repaint before synchronous conversion.
+- [x] Display workflow summary, files, and messages.
+- [x] Replace label status area with scrollable read-only results area.
+- [x] Update README and changelog.
+- [x] Verify locally.

@@ -26,8 +26,9 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - Source aggregation and selection helpers that group offers into exportable `CanonicalProduct` records.
 - GoDaddy CSV export helpers for new-product import batches.
 - A UI-independent new-import workflow that parses source feeds, aggregates products, and exports GoDaddy CSV batches in one run.
+- A desktop conversion flow for selecting feed files, choosing an output folder, setting basic options, and reviewing generated files and messages.
 
-The next planned work is wiring the desktop app to the new-import workflow. See [docs/features/ROADMAP.md](docs/features/ROADMAP.md) for the current feature sequence.
+The next planned work is GoDaddy product export sync for future update-mode support. See [docs/features/ROADMAP.md](docs/features/ROADMAP.md) for the current feature sequence.
 
 ## Project Structure
 
@@ -82,7 +83,7 @@ Run a new-import conversion from source files:
 
 All source file arguments are optional except that at least one primary feed is required. The Davidsons quantity CSV requires a Davidsons inventory CSV.
 
-Run the desktop app shell:
+Run the desktop app:
 
 ```bash
 .venv/bin/inventory-feed-tool-gui

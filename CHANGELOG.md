@@ -4,6 +4,7 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Wired the Tkinter desktop app to the new-import workflow with split distributor inputs, output folder selection, basic pricing/image options, and scrollable results.
 - Added a UI-independent new-import workflow that runs feed parsing, source aggregation, and GoDaddy CSV export in one pipeline.
 - Added a `new-import` CLI command for local conversion verification.
 - Added GoDaddy CSV export helpers for new-product import batches.

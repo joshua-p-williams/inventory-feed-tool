@@ -12,11 +12,23 @@ The project now has the core ETL building blocks:
 - Source aggregation and selected-offer logic.
 - GoDaddy CSV exporter for new-product import batches.
 - New-import workflow orchestration for file-based feeds to GoDaddy CSV batches.
-- Basic desktop shell and packaging workflow.
+- Desktop conversion flow and packaging workflow.
 
-The important remaining gap is desktop UI wiring. The parser, aggregator, exporter, and new-import workflow exist, but the desktop app still needs to call the workflow and present useful run results.
+The important remaining gap is update-mode support. The file-based new-import workflow is usable from both CLI and desktop UI, but GoDaddy `PRODUCT ID` mappings still need to be imported before update exports can be generated safely.
 
 ## Recently Completed
+
+### 0009-desktop-ui-conversion-flow
+
+Connected the desktop shell to the new-import workflow.
+
+Completed scope:
+
+- File pickers for Lipseys, Davidsons inventory feed, and Davidsons quantity feed.
+- Output folder selection for generated CSV batches.
+- Basic pricing and image options.
+- Clear status, warnings, and generated-file summary.
+- Guardrails for missing files and invalid input combinations.
 
 ### 0008-new-import-workflow
 
@@ -36,18 +48,6 @@ Completed scope:
 - Add a minimal CLI command for local verification.
 
 ## Recommended Next Path
-
-### 0009-desktop-ui-conversion-flow
-
-Connect the desktop shell to the new-import workflow.
-
-Expected scope:
-
-- File pickers for Lipseys, Davidsons catalog/inventory feed, and Davidsons quantity feed.
-- Output folder selection for generated CSV batches.
-- Basic pricing and image options.
-- Clear status, warnings, and generated-file summary.
-- Guardrails for missing files and non-exportable rows.
 
 ### 0010-godaddy-export-sync
 
