@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import replace
 from decimal import Decimal
 from pathlib import Path
@@ -34,6 +35,9 @@ from inventory_feed_tool.validation import ValidationMessage
 
 
 DISTRIBUTOR = "davidsons"
+DAVIDSONS_IMAGE_BASE_URL = "https://res.cloudinary.com/davidsons-inc/image/upload/media/catalog/product"
+DAVIDSONS_IMAGE_SOURCE = "davidsons_cloudinary_item_number"
+SAFE_IMAGE_ITEM_NUMBER_PATTERN = re.compile(r"^[A-Za-z0-9_.-]{2,}$")
 
 INVENTORY_REQUIRED_COLUMNS = {
     "Item #",
@@ -225,7 +229,7 @@ def _parse_davidsons_row(
             ),
         )
 
-    canonical_sku = _canonical_sku(upc, source_sku, row_number, messages)
+    canonical_sku, normalized_upc = _identity_values(upc, source_sku, row_number, messages)
 
     inventory = _parse_inventory(row, source_sku, row_number, quantity_index, configuration, messages)
     map_price = _optional_positive_money(row_text(row, "MSP"), messages, row_number, "MSP")
@@ -260,7 +264,7 @@ def _parse_davidsons_row(
             ),
             identity=ProductIdentity(
                 canonical_sku=canonical_sku,
-                upc=upc,
+                upc=normalized_upc,
                 manufacturer=row_text(row, "Manufacturer"),
                 brand=row_text(row, "Manufacturer"),
                 model_number=source_sku,
@@ -276,7 +280,7 @@ def _parse_davidsons_row(
             inventory=inventory,
             shipping=ShippingDetails(),
             compliance=ComplianceFlags(),
-            media=ProductMedia(),
+            media=_product_media(source_sku),
             attributes=attributes,
             warnings=tuple(messages),
         ),
@@ -387,12 +391,12 @@ def _optional_positive_money(
     return parsed
 
 
-def _canonical_sku(
+def _identity_values(
     upc: str | None,
     source_sku: str,
     row_number: int,
     messages: list[ValidationMessage],
-) -> str:
+) -> tuple[str, str | None]:
     if upc is None:
         messages.append(
             row_message(
@@ -403,10 +407,10 @@ def _canonical_sku(
                 field="UPC Code",
             )
         )
-        return fallback_canonical_sku(DISTRIBUTOR, source_sku)
+        return fallback_canonical_sku(DISTRIBUTOR, source_sku), None
 
     try:
-        return canonical_sku_from_upc(upc)
+        canonical_sku = canonical_sku_from_upc(upc)
     except ValueError:
         messages.append(
             row_message(
@@ -417,7 +421,35 @@ def _canonical_sku(
                 field="UPC Code",
             )
         )
-        return fallback_canonical_sku(DISTRIBUTOR, source_sku)
+        return fallback_canonical_sku(DISTRIBUTOR, source_sku), None
+
+    return canonical_sku, _digits_only(upc)
+
+
+def _product_media(source_sku: str) -> ProductMedia:
+    image_url = _image_url(source_sku)
+    if image_url is None:
+        return ProductMedia()
+
+    return ProductMedia(
+        image_url=image_url,
+        image_name=f"{source_sku}.jpg",
+        image_source=DAVIDSONS_IMAGE_SOURCE,
+    )
+
+
+def _image_url(source_sku: str) -> str | None:
+    source_sku = source_sku.strip()
+    if not SAFE_IMAGE_ITEM_NUMBER_PATTERN.fullmatch(source_sku):
+        return None
+
+    first = source_sku[0].lower()
+    second = source_sku[1].lower()
+    return f"{DAVIDSONS_IMAGE_BASE_URL}/{first}/{second}/{source_sku}.jpg"
+
+
+def _digits_only(value: str) -> str:
+    return "".join(character for character in value if character.isdigit())
 
 
 def _parse_availability(

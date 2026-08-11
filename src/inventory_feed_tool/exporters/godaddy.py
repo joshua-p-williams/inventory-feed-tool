@@ -282,7 +282,7 @@ def _money(value: Decimal | None) -> str:
     if value is None:
         return ""
     rounded = value.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
-    return _strip_decimal(rounded)
+    return format(rounded, ".2f")
 
 
 def _decimal(value: Decimal | None) -> str:

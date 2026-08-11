@@ -4,6 +4,7 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Hardened GoDaddy import output with clean Davidsons UPCs, fixed two-decimal money fields, and best-effort Davidsons image URLs.
 - Added compact run summaries and full timestamped conversion logs in the output folder.
 - Wired the Tkinter desktop app to the new-import workflow with split distributor inputs, output folder selection, basic pricing/image options, and scrollable results.
 - Added a UI-independent new-import workflow that runs feed parsing, source aggregation, and GoDaddy CSV export in one pipeline.

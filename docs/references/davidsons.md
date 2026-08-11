@@ -17,6 +17,8 @@ Local downloaded copies were kept in the parent project folder under `references
 - Cart items are not secured until checkout is completed.
 - `A` / allocated means demand exceeds supply and the item is unavailable to order online.
 - `Call` means quantity requires account-executive confirmation.
+- GalleryofGuns/Davidsons public product pages can expose full-color product images.
+- Public image results showed Davidsons product media hosted through Cloudinary under `res.cloudinary.com/davidsons-inc`.
 
 ## Feed Columns Of Interest
 
@@ -48,4 +50,6 @@ Important Davidsons quantity columns observed in local samples:
 - Preserve `Sale Price` and `Sale Ends`, but source sale pricing remains ignored unless a later pricing feature enables it.
 - Quantity tokens such as `A*`, `99+`, and `Call` should not be treated as ordinary exact numbers.
 - Allocated/unknown availability should be preserved but not exportable by default.
-- Current samples do not include image fields; Davidsons media fields should remain blank unless a future feed provides image data.
+- Current samples do not include explicit image fields.
+- Davidsons media can be enriched best-effort from item-number-based Cloudinary URLs when the source item number is safe to use in a URL.
+- Davidsons image URL construction should remain deterministic and offline by default; do not scrape GalleryofGuns product pages during normal conversion.

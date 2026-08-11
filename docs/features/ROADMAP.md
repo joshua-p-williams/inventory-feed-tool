@@ -14,10 +14,24 @@ The project now has the core ETL building blocks:
 - New-import workflow orchestration for file-based feeds to GoDaddy CSV batches.
 - Desktop conversion flow and packaging workflow.
 - Compact run summaries and full output-folder conversion logs.
+- Import-output hardening for clean UPCs, fixed money formatting, and Davidsons image URL coverage.
 
 The file-based new-import workflow is usable from both CLI and desktop UI. The next major gap is GoDaddy export sync, which is needed before reliable update-mode exports can be produced.
 
 ## Recently Completed
+
+### 0011-import-output-quality-hardening
+
+Fixed issues discovered by analyzing a full generated GoDaddy new-import output folder.
+
+Completed scope:
+
+- Blank invalid UPC placeholders such as `##` before GoDaddy export while preserving fallback SKUs.
+- Normalize hash-wrapped Davidsons UPC values to clean digit strings.
+- Format GoDaddy money fields with fixed two-decimal output.
+- Add conservative Davidsons image URL construction from public item-number-based image hosting patterns.
+- Add regression tests for invalid UPC, money formatting, and Davidsons image URL behavior.
+- Re-analyze generated output to confirm no `UPC=##`, no duplicate SKUs, consistent headers, fixed money formatting, and improved Davidsons image coverage.
 
 ### 0010-run-summary-and-output-usability
 
@@ -64,7 +78,7 @@ Completed scope:
 
 ## Recommended Next Path
 
-### 0011-godaddy-export-sync
+### 0012-godaddy-export-sync
 
 Import GoDaddy product exports and sync GoDaddy `PRODUCT ID` mappings into SQLite.
 
@@ -78,7 +92,7 @@ Expected scope:
 
 This feature should remain after the new-import workflow because it serves update mode, not the first usable import flow.
 
-### 0012-update-mode-export
+### 0013-update-mode-export
 
 Enable GoDaddy update CSV generation once product ID mappings are available.
 
@@ -89,7 +103,7 @@ Expected scope:
 - Populate `PRODUCT ID` for update exports.
 - Preserve new-import behavior separately.
 
-### 0013-authenticated-feed-sources
+### 0014-authenticated-feed-sources
 
 Evaluate authenticated distributor feed retrieval after the file-based workflow is working.
 

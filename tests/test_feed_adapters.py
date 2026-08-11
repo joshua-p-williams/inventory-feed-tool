@@ -143,7 +143,7 @@ class FeedAdapterTests(unittest.TestCase):
     def test_davidsons_parses_valid_row_without_quantity_file(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
             inventory_path = Path(temp_dir) / "davidsons_inventory.csv"
-            self._write_csv(inventory_path, DAVIDSONS_COLUMNS, [self._davidsons_row()])
+            self._write_csv(inventory_path, DAVIDSONS_COLUMNS, [self._davidsons_row(**{"UPC Code": "#736676037018#"})])
 
             result = parse_davidsons_inventory_csv(inventory_path, RunConfiguration())
 
@@ -153,11 +153,17 @@ class FeedAdapterTests(unittest.TestCase):
         self.assertEqual(offer.source.distributor, "davidsons")
         self.assertEqual(offer.source.source_sku, "DAV-1")
         self.assertEqual(offer.identity.canonical_sku, "UPC-736676037018")
+        self.assertEqual(offer.identity.upc, "736676037018")
         self.assertEqual(offer.pricing.unit_cost, Decimal("400.00"))
         self.assertEqual(offer.pricing.map_price, Decimal("525.00"))
         self.assertEqual(offer.pricing.calculated_price, Decimal("525.00"))
         self.assertEqual(offer.inventory.quantity, 2)
-        self.assertIsNone(offer.media.image_url)
+        self.assertEqual(
+            offer.media.image_url,
+            "https://res.cloudinary.com/davidsons-inc/image/upload/media/catalog/product/d/a/DAV-1.jpg",
+        )
+        self.assertEqual(offer.media.image_name, "DAV-1.jpg")
+        self.assertEqual(offer.media.image_source, "davidsons_cloudinary_item_number")
 
     def test_davidsons_quantity_file_merges_warehouse_quantities(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -230,6 +236,7 @@ class FeedAdapterTests(unittest.TestCase):
             result = parse_davidsons_inventory_csv(inventory_path, RunConfiguration())
 
         self.assertEqual(result.offers[0].identity.canonical_sku, "DAV-DAV-1")
+        self.assertIsNone(result.offers[0].identity.upc)
         self.assertTrue(any(message.code == "davidsons_missing_upc" for message in result.messages))
 
     def test_davidsons_invalid_upc_uses_source_fallback_and_warns(self) -> None:
@@ -241,7 +248,20 @@ class FeedAdapterTests(unittest.TestCase):
             result = parse_davidsons_inventory_csv(inventory_path, RunConfiguration())
 
         self.assertEqual(result.offers[0].identity.canonical_sku, "DAV-DAV-1")
+        self.assertIsNone(result.offers[0].identity.upc)
         self.assertTrue(any(message.code == "davidsons_invalid_upc" for message in result.messages))
+
+    def test_davidsons_unsafe_image_item_number_leaves_media_blank(self) -> None:
+        row = self._davidsons_row(**{"Item #": "BAD/SKU"})
+        with tempfile.TemporaryDirectory() as temp_dir:
+            inventory_path = Path(temp_dir) / "davidsons_inventory.csv"
+            self._write_csv(inventory_path, DAVIDSONS_COLUMNS, [row])
+
+            result = parse_davidsons_inventory_csv(inventory_path, RunConfiguration())
+
+        self.assertIsNone(result.offers[0].media.image_url)
+        self.assertIsNone(result.offers[0].media.image_name)
+        self.assertIsNone(result.offers[0].media.image_source)
 
     def test_davidsons_invalid_unit_cost_skips_row(self) -> None:
         row = self._davidsons_row(**{"Dealer Price": ""})

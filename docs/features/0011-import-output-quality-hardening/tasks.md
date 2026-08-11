@@ -1,0 +1,24 @@
+# Tasks
+
+- [x] Define feature scope.
+- [x] Analyze generated result folder.
+- [x] Capture output-quality findings.
+- [x] Identify invalid UPC root cause.
+- [x] Identify money-formatting root cause.
+- [x] Research Davidsons image URL options.
+- [x] Define architecture direction.
+- [x] Define implementation plan.
+- [x] Review feature docs.
+- [x] Add invalid Davidsons UPC regression tests.
+- [x] Add GoDaddy money formatting regression tests.
+- [x] Add Davidsons image URL regression tests.
+- [x] Fix Davidsons invalid UPC normalization.
+- [x] Add conservative Davidsons image URL construction.
+- [x] Fix GoDaddy money field formatting.
+- [x] Consider adding reusable output-quality analysis helper.
+- [x] Run full test suite.
+- [x] Compile source and tests.
+- [x] Run diff whitespace check.
+- [x] Regenerate or re-analyze output.
+- [x] Update research with post-fix results.
+- [x] Update changelog.
