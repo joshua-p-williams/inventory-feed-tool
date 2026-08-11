@@ -11,8 +11,10 @@ from inventory_feed_tool.app_state import (
     format_validation_messages,
     format_workflow_result,
 )
+from inventory_feed_tool.models import RunConfiguration
+from inventory_feed_tool.run_summary import format_full_run_log, write_run_log
 from inventory_feed_tool.validation import MessageSeverity
-from inventory_feed_tool.workflows import NewImportWorkflowResult, run_new_import_workflow
+from inventory_feed_tool.workflows import NewImportInput, NewImportWorkflowResult, run_new_import_workflow
 
 
 class InventoryFeedToolApp(tk.Tk):
@@ -198,17 +200,29 @@ class InventoryFeedToolApp(tk.Tk):
         self.update_idletasks()
 
         try:
-            result = run_new_import_workflow(
-                state.to_new_import_input(),
-                state.to_run_configuration(),
-            )
-            self._set_results(format_workflow_result(result))
+            inputs = state.to_new_import_input()
+            configuration = state.to_run_configuration()
+            result = run_new_import_workflow(inputs, configuration)
+            log_path = self._write_run_log(inputs, configuration, result)
+            self._set_results(format_workflow_result(result, log_path=log_path))
             self._show_completion_message(result)
         except Exception as exc:
             self._set_results(f"Unexpected error.\n\n{exc}")
             messagebox.showerror("Inventory Feed Tool", f"Unexpected error: {exc}")
         finally:
             self._set_convert_enabled(True)
+
+    def _write_run_log(
+        self,
+        inputs: NewImportInput,
+        configuration: RunConfiguration,
+        result: NewImportWorkflowResult,
+    ) -> Path | None:
+        if inputs.output_dir is None or result.export_result is None:
+            return None
+
+        log_text = format_full_run_log(result, inputs=inputs, configuration=configuration)
+        return write_run_log(inputs.output_dir, log_text).path
 
     def _show_completion_message(self, result: NewImportWorkflowResult) -> None:
         severities = {message.severity for message in result.messages}

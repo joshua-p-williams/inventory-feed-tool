@@ -38,11 +38,18 @@ class CliTests(unittest.TestCase):
                     str(output_dir),
                 ]
             )
+            log_files = sorted(path.name for path in output_dir.glob("conversion-log-*.txt"))
 
         self.assertEqual(exit_code, 0)
-        self.assertIn("Parsed 1 offers from 1 rows; exported 1 products.", output)
-        self.assertIn("Wrote 1 rows to", output)
+        self.assertIn("Completed.", output)
+        self.assertIn("Rows seen: 1", output)
+        self.assertIn("Offers parsed: 1", output)
+        self.assertIn("Products exported: 1", output)
+        self.assertIn("Output files: 1", output)
         self.assertIn("godaddy-import-001.csv", output)
+        self.assertIn("Full log:", output)
+        self.assertTrue(any(name.startswith("conversion-log-") for name in log_files))
+        self.assertIn("conversion-log-latest.txt", log_files)
 
     def test_new_import_reports_files_even_when_row_errors_make_exit_nonzero(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -64,11 +71,22 @@ class CliTests(unittest.TestCase):
                     str(output_dir),
                 ]
             )
+            log_files = sorted(output_dir.glob("conversion-log-*.txt"))
+            timestamped_log = next(path for path in log_files if path.name != "conversion-log-latest.txt")
+            log_text = timestamped_log.read_text(encoding="utf-8")
 
         self.assertEqual(exit_code, 1)
-        self.assertIn("ERROR: lipseys_missing_unit_cost", output)
-        self.assertIn("Parsed 1 offers from 2 rows; exported 1 products.", output)
-        self.assertIn("Wrote 1 rows to", output)
+        self.assertIn("Completed with errors.", output)
+        self.assertIn("Rows seen: 2", output)
+        self.assertIn("Products exported: 1", output)
+        self.assertIn("Output files: 1", output)
+        self.assertIn("ERROR lipseys_missing_unit_cost (CURRENTPRICE): 1", output)
+        self.assertIn("Full log:", output)
+        self.assertIn(
+            "ERROR lipseys_missing_unit_cost (CURRENTPRICE): "
+            "Lipseys row is missing valid CURRENTPRICE or PRICE. Row 3.",
+            log_text,
+        )
 
     def test_new_import_validation_failure_returns_nonzero_without_summary(self) -> None:
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -77,9 +95,11 @@ class CliTests(unittest.TestCase):
             exit_code, output = self._run_cli(["new-import", "--output-dir", str(output_dir)])
 
         self.assertEqual(exit_code, 1)
-        self.assertIn("ERROR: new_import_missing_source", output)
+        self.assertIn("Validation failed.", output)
+        self.assertIn("ERROR new_import_missing_source (source): 1", output)
         self.assertNotIn("Parsed", output)
         self.assertNotIn("Wrote", output)
+        self.assertNotIn("Full log:", output)
 
     def _run_cli(self, argv: list[str]) -> tuple[int, str]:
         output = io.StringIO()

@@ -1,0 +1,29 @@
+# Tasks
+
+- [x] Define feature scope.
+- [x] Review real Windows sample run output.
+- [x] Review current workflow result shape.
+- [x] Define compact UI summary behavior.
+- [x] Define full output-folder log behavior.
+- [x] Define log filename.
+- [x] Define message grouping behavior.
+- [x] Define CLI parity behavior.
+- [x] Defer max-products/export limiting.
+- [x] Define test coverage.
+- [x] Review feature docs.
+- [x] Implement `run_summary.py`.
+- [x] Add `MessageSummary`.
+- [x] Add `WrittenRunLog`.
+- [x] Implement message grouping.
+- [x] Implement compact UI summary formatter.
+- [x] Implement full log formatter.
+- [x] Implement log writer.
+- [x] Update desktop conversion flow to write log.
+- [x] Update UI result formatting to compact summary.
+- [x] Update CLI conversion flow to write log.
+- [x] Update CLI output to compact summary.
+- [x] Add summary/log unit tests.
+- [x] Update existing app-state tests.
+- [x] Update existing CLI tests.
+- [x] Update README and changelog.
+- [x] Verify locally.

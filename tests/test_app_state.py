@@ -175,12 +175,14 @@ class DesktopAppStateTests(unittest.TestCase):
             products_exported=1,
         )
 
-        formatted = format_workflow_result(result)
+        formatted = format_workflow_result(result, log_path=Path("exports/conversion-log-20260810-143012.txt"))
 
         self.assertIn("Completed with errors.", formatted)
         self.assertIn("Products exported: 1", formatted)
         self.assertIn("exports/godaddy-import-001.csv", formatted)
-        self.assertIn("ERROR lipseys_missing_unit_cost (unit_cost): Missing unit cost. Row 2.", formatted)
+        self.assertIn("exports/conversion-log-20260810-143012.txt", formatted)
+        self.assertIn("ERROR lipseys_missing_unit_cost (unit_cost): 1", formatted)
+        self.assertNotIn("Missing unit cost. Row 2.", formatted)
 
     def test_workflow_result_formatter_includes_validation_errors(self) -> None:
         result = NewImportWorkflowResult(
@@ -190,7 +192,8 @@ class DesktopAppStateTests(unittest.TestCase):
         formatted = format_workflow_result(result)
 
         self.assertIn("Validation failed.", formatted)
-        self.assertIn("ERROR new_import_missing_source: Select at least one source feed.", formatted)
+        self.assertIn("ERROR new_import_missing_source: 1", formatted)
+        self.assertNotIn("Select at least one source feed.", formatted)
 
 
 if __name__ == "__main__":

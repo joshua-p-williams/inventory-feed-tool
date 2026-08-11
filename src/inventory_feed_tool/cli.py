@@ -4,6 +4,8 @@ import argparse
 from pathlib import Path
 
 from inventory_feed_tool import __version__
+from inventory_feed_tool.models import RunConfiguration
+from inventory_feed_tool.run_summary import format_compact_run_summary, format_full_run_log, write_run_log
 from inventory_feed_tool.workflows import NewImportInput, run_new_import_workflow
 
 
@@ -53,27 +55,25 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "new-import":
+        inputs = NewImportInput(
+            lipseys_csv=args.lipseys_csv,
+            davidsons_inventory_csv=args.davidsons_inventory_csv,
+            davidsons_quantity_csv=args.davidsons_quantity_csv,
+            output_dir=args.output_dir,
+        )
+        configuration = RunConfiguration()
         result = run_new_import_workflow(
-            NewImportInput(
-                lipseys_csv=args.lipseys_csv,
-                davidsons_inventory_csv=args.davidsons_inventory_csv,
-                davidsons_quantity_csv=args.davidsons_quantity_csv,
-                output_dir=args.output_dir,
-            ),
+            inputs,
+            configuration,
             filename_prefix=args.filename_prefix,
         )
 
-        for message in result.messages:
-            print(f"{message.severity.value.upper()}: {message.code}: {message.message}")
+        log_path = None
+        if result.export_result is not None and inputs.output_dir is not None:
+            log_text = format_full_run_log(result, inputs=inputs, configuration=configuration)
+            log_path = write_run_log(inputs.output_dir, log_text).path
 
-        if result.export_result is not None:
-            print(
-                "Parsed "
-                f"{result.source_offers_parsed} offers from {result.source_rows_seen} rows; "
-                f"exported {result.products_exported} products."
-            )
-            for exported_file in result.export_result.files:
-                print(f"Wrote {exported_file.row_count} rows to {exported_file.path}")
+        print(format_compact_run_summary(result, log_path=log_path))
 
         return 1 if result.has_errors else 0
 

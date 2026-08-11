@@ -5,7 +5,7 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 
 from inventory_feed_tool.models import ImagePolicy, PricingProfile, RunConfiguration
-from inventory_feed_tool.validation import MessageSeverity, ValidationMessage
+from inventory_feed_tool.run_summary import format_compact_run_summary
 from inventory_feed_tool.workflows import NewImportInput, NewImportWorkflowResult
 
 
@@ -92,48 +92,8 @@ def format_validation_messages(messages: list[str]) -> str:
     return "Validation failed.\n\nMessages:\n" + "\n".join(f"- {message}" for message in messages)
 
 
-def format_workflow_result(result: NewImportWorkflowResult) -> str:
-    lines = [_result_heading(result), ""]
-    lines.extend(
-        [
-            f"Rows seen: {result.source_rows_seen}",
-            f"Rows skipped: {result.source_rows_skipped}",
-            f"Offers parsed: {result.source_offers_parsed}",
-            f"Product groups: {result.product_groups}",
-            f"Product groups dropped: {result.product_groups_dropped}",
-            f"Products exported: {result.products_exported}",
-            f"Products skipped: {result.products_skipped}",
-        ]
-    )
-
-    if result.export_result is not None:
-        lines.extend(["", "Output files:"])
-        if result.export_result.files:
-            lines.extend(str(exported_file.path) for exported_file in result.export_result.files)
-        else:
-            lines.append("No files were written.")
-
-    if result.messages:
-        lines.extend(["", "Messages:"])
-        lines.extend(_format_message(message) for message in result.messages)
-
-    return "\n".join(lines)
-
-
-def _result_heading(result: NewImportWorkflowResult) -> str:
-    severities = {message.severity for message in result.messages}
-    if MessageSeverity.ERROR in severities:
-        if result.export_result is None:
-            return "Validation failed."
-        return "Completed with errors."
-    if MessageSeverity.WARNING in severities:
-        return "Completed with warnings."
-    return "Completed."
-
-
-def _format_message(message: ValidationMessage) -> str:
-    field = f" ({message.field})" if message.field else ""
-    return f"{message.severity.value.upper()} {message.code}{field}: {message.message}"
+def format_workflow_result(result: NewImportWorkflowResult, *, log_path: Path | None = None) -> str:
+    return format_compact_run_summary(result, log_path=log_path)
 
 
 def _parse_markup_percent(value: str) -> Decimal | None:

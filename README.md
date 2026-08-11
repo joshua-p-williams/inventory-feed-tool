@@ -27,6 +27,7 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - GoDaddy CSV export helpers for new-product import batches.
 - A UI-independent new-import workflow that parses source feeds, aggregates products, and exports GoDaddy CSV batches in one run.
 - A desktop conversion flow for selecting feed files, choosing an output folder, setting basic options, and reviewing generated files and messages.
+- Compact run summaries plus full timestamped conversion logs written beside generated CSV files.
 
 The next planned work is GoDaddy product export sync for future update-mode support. See [docs/features/ROADMAP.md](docs/features/ROADMAP.md) for the current feature sequence.
 
@@ -82,6 +83,7 @@ Run a new-import conversion from source files:
 ```
 
 All source file arguments are optional except that at least one primary feed is required. The Davidsons quantity CSV requires a Davidsons inventory CSV.
+Completed conversions write GoDaddy CSV batch files plus a timestamped `conversion-log-YYYYMMDD-HHMMSS.txt` file in the selected output folder. A `conversion-log-latest.txt` convenience copy is also updated.
 
 Run the desktop app:
 

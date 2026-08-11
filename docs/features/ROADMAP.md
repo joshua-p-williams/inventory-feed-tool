@@ -13,10 +13,25 @@ The project now has the core ETL building blocks:
 - GoDaddy CSV exporter for new-product import batches.
 - New-import workflow orchestration for file-based feeds to GoDaddy CSV batches.
 - Desktop conversion flow and packaging workflow.
+- Compact run summaries and full output-folder conversion logs.
 
-The important remaining gap is update-mode support. The file-based new-import workflow is usable from both CLI and desktop UI, but GoDaddy `PRODUCT ID` mappings still need to be imported before update exports can be generated safely.
+The file-based new-import workflow is usable from both CLI and desktop UI. The next major gap is GoDaddy export sync, which is needed before reliable update-mode exports can be produced.
 
 ## Recently Completed
+
+### 0010-run-summary-and-output-usability
+
+Improved the usability of large conversion runs before adding update-mode workflows.
+
+Completed scope:
+
+- Summarize validation messages by severity, code, field, and count in the UI and CLI.
+- Keep generated output file paths visible without flooding the results area.
+- Write a full timestamped text conversion log into the selected output folder for every completed run.
+- Include run counts, source files, configuration summary, generated CSV files, warnings, and errors in the log.
+- Preserve detailed per-row messages in the output-folder log even when the UI and CLI show grouped summaries.
+- Update `conversion-log-latest.txt` as a convenience copy.
+- Defer max-products/export limiting to a later feature.
 
 ### 0009-desktop-ui-conversion-flow
 
@@ -49,7 +64,7 @@ Completed scope:
 
 ## Recommended Next Path
 
-### 0010-godaddy-export-sync
+### 0011-godaddy-export-sync
 
 Import GoDaddy product exports and sync GoDaddy `PRODUCT ID` mappings into SQLite.
 
@@ -63,7 +78,7 @@ Expected scope:
 
 This feature should remain after the new-import workflow because it serves update mode, not the first usable import flow.
 
-### 0011-update-mode-export
+### 0012-update-mode-export
 
 Enable GoDaddy update CSV generation once product ID mappings are available.
 
@@ -74,7 +89,7 @@ Expected scope:
 - Populate `PRODUCT ID` for update exports.
 - Preserve new-import behavior separately.
 
-### 0012-authenticated-feed-sources
+### 0013-authenticated-feed-sources
 
 Evaluate authenticated distributor feed retrieval after the file-based workflow is working.
 
