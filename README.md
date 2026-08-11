@@ -25,6 +25,9 @@ The ETL core currently includes the shared model pieces that feed adapters and e
 - File-based Lipseys and Davidsons CSV adapters that produce normalized `SourceOffer` records and validation messages.
 - Source aggregation and selection helpers that group offers into exportable `CanonicalProduct` records.
 - GoDaddy CSV export helpers for new-product import batches.
+- A UI-independent new-import workflow that parses source feeds, aggregates products, and exports GoDaddy CSV batches in one run.
+
+The next planned work is wiring the desktop app to the new-import workflow. See [docs/features/ROADMAP.md](docs/features/ROADMAP.md) for the current feature sequence.
 
 ## Project Structure
 
@@ -50,6 +53,8 @@ Work is organized under `docs/features/`. Each feature gets its own folder with:
 
 This keeps assisted coding work reviewable and gives future changes a place to preserve context.
 
+The current roadmap is tracked in [docs/features/ROADMAP.md](docs/features/ROADMAP.md). Update it when new discoveries change the feature order or scope.
+
 ## Development
 
 Create a local virtual environment and install the package:
@@ -64,6 +69,18 @@ Run the hello-world CLI from the repository root:
 ```bash
 .venv/bin/python -m inventory_feed_tool
 ```
+
+Run a new-import conversion from source files:
+
+```bash
+.venv/bin/inventory-feed-tool new-import \
+  --lipseys-csv path/to/lipseys.csv \
+  --davidsons-inventory-csv path/to/davidsons_inventory.csv \
+  --davidsons-quantity-csv path/to/davidsons_quantity.csv \
+  --output-dir path/to/output-folder
+```
+
+All source file arguments are optional except that at least one primary feed is required. The Davidsons quantity CSV requires a Davidsons inventory CSV.
 
 Run the desktop app shell:
 

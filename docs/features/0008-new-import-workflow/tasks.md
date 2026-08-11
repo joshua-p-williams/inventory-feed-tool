@@ -1,0 +1,24 @@
+# Tasks
+
+- [x] Define feature scope.
+- [x] Review prior adapter, aggregation, and exporter decisions.
+- [x] Define workflow API shape.
+- [x] Define supported input combinations.
+- [x] Define output directory behavior.
+- [x] Define storage boundary.
+- [x] Define validation behavior.
+- [x] Define message handling behavior.
+- [x] Define test coverage.
+- [x] Review feature docs.
+- [x] Resolve review points.
+- [x] Implement workflow package structure.
+- [x] Implement `NewImportInput`.
+- [x] Implement `NewImportWorkflowResult`.
+- [x] Implement preflight validation.
+- [x] Implement feed parsing orchestration.
+- [x] Implement aggregation orchestration.
+- [x] Implement GoDaddy export orchestration.
+- [x] Add minimal CLI command.
+- [x] Add workflow unit tests.
+- [x] Update README and changelog.
+- [x] Verify locally.

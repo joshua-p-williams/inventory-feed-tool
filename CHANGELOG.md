@@ -4,6 +4,8 @@ All notable project changes will be documented here.
 
 ## Unreleased
 
+- Added a UI-independent new-import workflow that runs feed parsing, source aggregation, and GoDaddy CSV export in one pipeline.
+- Added a `new-import` CLI command for local conversion verification.
 - Added GoDaddy CSV export helpers for new-product import batches.
 - Added source aggregation and source-selection helpers for canonical products.
 - Added file-based Lipseys and Davidsons CSV feed adapters with sanitized fixture tests.
